@@ -18,3 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// route สำหรับlinkไปที่vue หากไม่ใส่จะไม่สามารถกรอกpathของvueลงurlตรงๆได้เลย
+Route::get('{path}', 'HomeController@index')->where('path', '([A-z\d-\/_.]+)?');
+// Route::get('/{component?}', 'HomeController@index');
+
