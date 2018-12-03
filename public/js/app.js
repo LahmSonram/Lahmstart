@@ -51635,11 +51635,11 @@ var render = function() {
                       ],
                       1
                     )
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(2)
                 ]
-              ),
-              _vm._v(" "),
-              _vm._m(2)
+              )
             ])
           ]
         )
@@ -51763,7 +51763,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
         [_vm._v("Create")]
       )
     ])
