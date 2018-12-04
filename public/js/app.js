@@ -14045,7 +14045,6 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_3_vue_progressbar___default.a, {
 
 
 window.swal = __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default.a;
-
 var toast = __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default.a.mixin({
   toast: true,
   position: 'top-end',
@@ -14053,6 +14052,8 @@ var toast = __WEBPACK_IMPORTED_MODULE_4_sweetalert2___default.a.mixin({
   timer: 3000
 });
 window.toast = toast;
+
+window.Fire = new Vue();
 
 var routes = [{ path: '/dashboard', component: __webpack_require__(43) }, { path: '/profile', component: __webpack_require__(46) }, { path: '/users', component: __webpack_require__(49) }];
 
@@ -51407,6 +51408,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         createUser: function createUser() {
             this.$Progress.start();
             this.form.post('api/user');
+            Fire.$emit('AfterCreate');
             $('#addNew').modal('hide');
             toast({
                 type: 'success',
@@ -51419,9 +51421,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this2 = this;
 
         this.loadUsers();
-        setInterval(function () {
-            return _this2.loadUsers();
-        }, 3000);
+        Fire.$on('AfterCreate', function () {
+            _this2.loadUsers();
+        });
+        // setInterval(() => this.loadUsers(), 3000);
     }
 });
 

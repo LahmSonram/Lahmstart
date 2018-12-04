@@ -29,7 +29,6 @@ Vue.use(VueProgressBar, {
 
 import swal from 'sweetalert2'
 window.swal = swal;
-
 const toast = swal.mixin({
   toast: true,
   position: 'top-end',
@@ -37,6 +36,9 @@ const toast = swal.mixin({
   timer: 3000
 });
 window.toast = toast;
+
+window.Fire = new Vue();
+
 
 let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue') },
