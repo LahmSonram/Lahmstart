@@ -50,12 +50,13 @@ a<template>
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addNew">Add New title</h5>
+                <h5 v-show="editmode" class="modal-title" id="addNew">Update User Info</h5>
+                <h5 v-show="!editmode" class="modal-title" id="addNew">Add New</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form @submit.prevent="createUser">
+            <form @submit.prevent="editmode ? updateUser() : createUser()">
                 <div class="modal-body">
                     <div class="form-group">
                         <input v-model="form.name" type="text" name="name"
@@ -97,7 +98,8 @@ a<template>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button v-show="editmode" type="submit" class="btn btn-success">Update</button>
+                    <button v-show="!editmode" type="submit" class="btn btn-primary">Create</button>
                 </div>
             </form>
             </div>
@@ -111,6 +113,7 @@ a<template>
     export default {
         data(){
             return{
+                editmode: false,
                 users: {},
                 form: new Form({
                     name: '',
@@ -123,12 +126,17 @@ a<template>
             }
         },
         methods:{
+            updateUser(){
+
+            },
             editModal(user){
+                this.editmode = true;
                 this.form.reset();
                 $('#addNew').modal('show');
                 this.form.fill(user);
             },
             newModal(){
+                this.editmode = false;
                 this.form.reset();
                 $('#addNew').modal('show');
             },
