@@ -33,7 +33,7 @@ a<template>
                                 <button class="btn btn-primary"> Edit <i class="fa fa-edit"></i></button>
                             </a>
                             /
-                            <a href="#">
+                            <a href="#" @click="deleteUser(user.id)">
                                 <button class="btn btn-danger"> Trash <i class="fa fa-trash"></i> </button>
                             </a>
                         </td>
@@ -123,6 +123,34 @@ a<template>
             }
         },
         methods:{
+            deleteUser(id){
+                swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    // sent request to the server
+                    if(result.value){
+                        this.form.delete('api/user/' + id).then(() => {
+                            swal(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                            )
+                            Fire.$emit('AfterCreate');
+                        }).catch(() => {
+                            swal(
+                                "Failed!", "There was something wronge.",
+                                "warning"
+                            )
+                        })
+                    }
+                })
+            },
             loadUsers(){
                 axios.get('api/user').then(({data}) => (this.users = data.data));
             },
