@@ -14,19 +14,29 @@ import moment from 'moment';
 import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
-import {Form, HasError, AlertError} from 'vform';
 
+import {Form, HasError, AlertError} from 'vform';
 window.Form = Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
 import VueProgressBar from 'vue-progressbar'
-
 Vue.use(VueProgressBar, {
   color: 'rgb(143, 255, 199)',
   failedColor: 'red',
   height: '10px'
 })
+
+import swal from 'sweetalert2'
+window.swal = swal;
+
+const toast = swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000
+});
+window.toast = toast;
 
 let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue') },
