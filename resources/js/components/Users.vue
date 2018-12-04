@@ -26,8 +26,8 @@ a<template>
                         <td>{{user.id}}</td>
                         <td>{{user.name}}</td>
                         <td>{{user.email}}</td>
-                        <td>{{user.type}}</td>
-                        <td>{{user.created_at}}</td>
+                        <td>{{user.type | upText}}</td>
+                        <td>{{user.created_at | myDate}}</td>
                         <td>
                             <a href="#">
                                 <button class="btn btn-primary"> Edit <i class="fa fa-edit"></i></button>
