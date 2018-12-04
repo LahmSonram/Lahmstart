@@ -13,28 +13,31 @@ a<template>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover">
-                  <tbody><tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Type</th>
-                    <th>Modify</th>
-                  </tr>
-                  <tr>
-                    <td>183</td>
-                    <td>John Doe</td>
-                    <td>11-7-2014</td>
-                    <td><span class="tag tag-success">Approved</span></td>
-                    <td>
-                        <a href="#">
-                            <button class="btn btn-primary"> Edit <i class="fa fa-edit"></i></button>
-                        </a>
-                        /
-                        <a href="#">
-                            <button class="btn btn-danger"> Trash <i class="fa fa-trash"></i> </button>
-                        </a>
-                    </td>
-                  </tr>
+                  <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Type</th>
+                        <th>Register At</th>
+                        <th>Modify</th>
+                    </tr>
+                    <tr v-for="user in users" :key="user.id">
+                        <td>{{user.id}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.type}}</td>
+                        <td>{{user.created_at}}</td>
+                        <td>
+                            <a href="#">
+                                <button class="btn btn-primary"> Edit <i class="fa fa-edit"></i></button>
+                            </a>
+                            /
+                            <a href="#">
+                                <button class="btn btn-danger"> Trash <i class="fa fa-trash"></i> </button>
+                            </a>
+                        </td>
+                    </tr>
                 </tbody></table>
               </div>
               <!-- /.card-body -->
@@ -108,6 +111,7 @@ a<template>
     export default {
         data(){
             return{
+                users: {},
                 form: new Form({
                     name: '',
                     email: '',
@@ -119,12 +123,15 @@ a<template>
             }
         },
         methods:{
+            loadUsers(){
+                axios.get('api/user').then(({data}) => (this.users = data.data));
+            },
             createUser(){
                 this.form.post('api/user');
             }
         },
-        mounted() {
-            console.log('Component mounted.')
+        created() {
+            this.loadUsers();
         }
     }
 </script>
