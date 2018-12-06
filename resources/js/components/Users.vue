@@ -116,6 +116,7 @@ a<template>
                 editmode: false,
                 users: {},
                 form: new Form({
+                    id:'',
                     name: '',
                     email: '',
                     password: '',
@@ -127,7 +128,22 @@ a<template>
         },
         methods:{
             updateUser(){
-
+                this.$Progress.start();
+                this.form.put('api/user/'+this.form.id)
+                .then(() => {
+                    $('#addNew').modal('hide');
+                    swal(
+                        'Updated!',
+                        'Information has been updated.',
+                        'success'
+                    )
+                    Fire.$emit('AfterCreate');
+                    this.$Progress.finish();
+                    
+                })
+                .catch(() => {
+                    this.$Progress.fail();
+                });
             },
             editModal(user){
                 this.editmode = true;
