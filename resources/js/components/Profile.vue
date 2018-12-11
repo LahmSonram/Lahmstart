@@ -193,20 +193,20 @@
                             <label for="inputName2" class="col-sm-2 control-label">Name</label>
 
                             <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputName2" placeholder="Name">
+                                <input type="text" class="form-control" id="inputName2" placeholder="Name">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
 
                             <div class="col-sm-10">
-                            <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                                <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="photo" class="col-sm-2 control-label">Profile Photo</label>
                             <div class="col-sm-10">
-                                <input type="file" name="photo" class="form-input">
+                                <input type="file" @change="updateProfile" name="photo" class="form-input">
                             </div>
                         </div>
                         <div class="form-group">
@@ -253,6 +253,17 @@
             }
         },
         methods:{
+            updateProfile(e){
+                // console.log('uploading');
+                let file = e.target.files[0];
+                console.log(file);
+                let reader = new FileReader();
+                reader.onloadend = (file) => {
+                    console.log(reader.result);
+                    this.form.photo = reader.result;
+                }
+                reader.readAsDataURL(file);
+            },
             loadUser(){
                 axios.get('api/profile').then(({data}) => (this.form.fill(data)));
             }
