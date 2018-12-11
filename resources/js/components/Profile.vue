@@ -190,13 +190,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputName2" class="col-sm-2 control-label">Name</label>
-
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputName2" placeholder="Name">
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
 
                             <div class="col-sm-10">
@@ -206,7 +199,7 @@
                         <div class="form-group">
                             <label for="photo" class="col-sm-2 control-label">Profile Photo</label>
                             <div class="col-sm-10">
-                                <input type="file" @change="updateProfile" name="photo" class="form-input">
+                                <input type="file" accept="image/*" @change="updateProfile" name="photo" class="form-input">
                             </div>
                         </div>
                         <div class="form-group">
@@ -217,7 +210,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-danger">Submit</button>
+                            <button @click.prevent="updateInfo" type="submit" class="btn btn-success">Update</button>
                             </div>
                         </div>
                         </form>
@@ -240,7 +233,6 @@
         },
         data(){
             return{
-                users: {},
                 form: new Form({
                     id:'',
                     name: '',
@@ -253,6 +245,15 @@
             }
         },
         methods:{
+            updateInfo(){
+                this.form.put('api/profile/')
+                .then(() => {
+
+                })
+                .catch(() => {
+
+                });
+            },
             updateProfile(e){
                 // console.log('uploading');
                 let file = e.target.files[0];
@@ -263,13 +264,10 @@
                     this.form.photo = reader.result;
                 }
                 reader.readAsDataURL(file);
-            },
-            loadUser(){
-                axios.get('api/profile').then(({data}) => (this.form.fill(data)));
             }
         },
         created(){
-            this.loadUser();
+            axios.get('api/profile').then(({data}) => (this.form.fill(data)));
         }
     }
 </script>
