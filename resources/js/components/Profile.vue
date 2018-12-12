@@ -176,24 +176,30 @@
                     <div class="tab-pane active show" id="settings">
                         <form class="form-horizontal">
                         <div class="form-group">
-                            <label for="inputName" class="col-sm-2 control-label">Name</label>
+                            <label for="name" class="col-sm-2 control-label">Name</label>
 
                             <div class="col-sm-10">
-                                <input v-model="form.name" type="email" class="form-control" id="inputName" placeholder="Name">
+                                <input v-model="form.name" type="text" class="form-control" id="name" placeholder="Name"
+                                :class="{'is-invalid':form.errors.has('name')}">
+                                <has-error :form="form" field="name"></has-error>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                            <label for="email" class="col-sm-2 control-label">Email</label>
 
                             <div class="col-sm-10">
-                                <input type="email" v-model="form.email" class="form-control" id="inputEmail" placeholder="Email">
+                                <input type="email" v-model="form.email" class="form-control" id="email" placeholder="Email" 
+                                :class="{'is-invalid':form.errors.has('email')}">
+                                <has-error :form="form" field="email"></has-error>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
 
                             <div class="col-sm-10">
-                                <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                                <textarea v-model="form.bio" class="form-control" id="inputExperience" placeholder="Experience">
+                                </textarea>
+                                <has-error :form="form" field="bio"></has-error>
                             </div>
                         </div>
                         <div class="form-group">
@@ -203,9 +209,11 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="passport" class="col-sm-2 control-label">Passport (leave empty if not changing)</label>
+                            <label for="password" class="col-sm-2 control-label">Passport (leave empty if not changing)</label>
                             <div class="col-sm-10">
-                                <input type="passport" v-model="form.password" class="form-control" id="passport" placeholder="Passport">
+                                <input type="password" v-model="form.password" class="form-control" id="password" placeholder="Passport"
+                                :class="{'is-invalid':form.errors.has('password')}">
+                                <has-error :form="form" field="password"></has-error>
                             </div>
                         </div>
                         <div class="form-group">
