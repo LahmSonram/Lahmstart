@@ -203,9 +203,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="passport" class="col-sm-2 control-label">Passport</label>
+                            <label for="passport" class="col-sm-2 control-label">Passport (leave empty if not changing)</label>
                             <div class="col-sm-10">
-                                <input type="passport" class="form-control" id="passport" placeholder="Passport">
+                                <input type="passport" v-model="form.password" class="form-control" id="passport" placeholder="Passport">
                             </div>
                         </div>
                         <div class="form-group">
