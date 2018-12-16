@@ -73338,14 +73338,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         getProfilePhoto: function getProfilePhoto() {
-            return "img/profile/" + this.form.photo;
+            var photo = this.form.photo.length > 200 ? this.form.photo : "img/profile/" + this.form.photo;
+            return photo;
         },
         updateInfo: function updateInfo() {
             var _this = this;
 
             this.$Progress.start();
+            if (this.form.password == '') {
+                this.form.password = undefined;
+            }
             this.form.put('api/profile/').then(function () {
-
+                Fire.$emit('AfterCreate');
                 _this.$Progress.finish();
             }).catch(function () {
                 _this.$Progress.fail();
@@ -73367,15 +73371,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             } else {
                 swal("Oops!", "You are uploading a large file", "error");
             }
+        },
+        AfterCreate: function AfterCreate() {
+            var _this3 = this;
+
+            axios.get('api/profile').then(function (_ref) {
+                var data = _ref.data;
+                return _this3.form.fill(data);
+            });
         }
     },
     created: function created() {
-        var _this3 = this;
-
-        axios.get('api/profile').then(function (_ref) {
-            var data = _ref.data;
-            return _this3.form.fill(data);
-        });
+        this.AfterCreate();
     }
 });
 
