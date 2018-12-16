@@ -8,7 +8,11 @@
 require('./bootstrap');
 require('admin-lte');
 
+
 window.Vue = require('vue');
+
+import Gate from "./Gate";
+Vue.prototype.$gate = new Gate(window.user);
 
 import moment from 'moment';
 import VueRouter from 'vue-router';
