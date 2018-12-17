@@ -63,6 +63,8 @@ Vue.component(
   require('./components/NotFound.vue')
 );
 
+Vue.component('pagination', require('laravel-vue-pagination'));
+
 let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue') },
     { path: '/developer', component: require('./components/Developer.vue') },
