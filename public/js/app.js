@@ -30854,9 +30854,9 @@ var app = new Vue({
     search: ''
   },
   methods: {
-    searchit: function searchit() {
+    searchit: _.debounce(function () {
       Fire.$emit('searching');
-    }
+    }, 1000)
   }
 });
 
@@ -30874,6 +30874,7 @@ window._ = __webpack_require__(144);
  */
 
 try {
+  window._ = __webpack_require__(144);
   window.Popper = __webpack_require__(8).default;
   window.$ = window.jQuery = __webpack_require__(9);
 
